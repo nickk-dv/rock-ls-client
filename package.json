@@ -9,6 +9,10 @@
   "categories": [
     "Programming Languages"
   ],
+  "activationEvents": [
+    "onLanguage"
+  ],
+  "main": "./client/out/extension",
   "contributes": {
     "languages": [{
       "id": "lang",
@@ -21,5 +25,18 @@
       "scopeName": "source.lang",
       "path": "./config/lang.tmLanguage.json"
     }]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.81.0",
+    "@types/node": "^20.5.7",
+    "typescript": "^5.2.2"
   }
 }
