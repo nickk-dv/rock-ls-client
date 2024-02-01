@@ -1,0 +1,25 @@
+{
+  "name": "lang-ls-client",
+  "displayName": "lang-ls",
+  "description": "lang language support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "lang",
+      "aliases": ["lang", "lang"],
+      "extensions": [".lang"],
+      "configuration": "./config/language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "lang",
+      "scopeName": "source.lang",
+      "path": "./config/lang.tmLanguage.json"
+    }]
+  }
+}

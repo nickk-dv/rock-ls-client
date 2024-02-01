@@ -1,0 +1,116 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "lang",
+	"scopeName": "source.lang",
+	"files.associations": {
+		"*.lang": "source.lang"
+	},
+	"patterns": [
+		{ "include": "#comments"  },
+		{ "include": "#keywords"  },
+		{ "include": "#constants" },
+		{ "include": "#strings"   },
+		{ "include": "#procedures"},
+		{ "include": "#type_decl" },
+		{ "include": "#variables" }
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.block",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"captures": {
+						"0": {
+							"name": "comment.block.begin"
+						},
+						"1": {
+							"name": "comment.block.end"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comments"
+						}
+					]
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "comment.line.double-dash",
+					"match": "//.*$"
+				},
+				{
+					"name": "keyword.control.lang",
+					"match": "\\b(if|else|for|defer|break|match|return|continue)\\b"
+				},
+				{
+					"name": "keyword.other.lang",
+					"match": "\\b(pub|mut|mod|enum|union|struct|import|super|package|cast|sizeof)\\b"
+				},
+				{
+					"name": "entity.name.type.lang",
+					"match": "\\b(bool|s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize|f32|f64|char|rawptr)\\b"
+				},
+				{
+					"name": "constant.language.lang",
+					"match": "\\b(null|true|false)\\b"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.numeric",
+					"match": "\\b(0|([1-9]\\d*))(f32|f64|s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize)?\\b"
+				},
+				{
+					"name": "constant.numeric",
+					"match": "\\b\\d+\\.\\d+(f32|f64)?\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.lang",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.lang",
+					"match": "\\\\."
+				}
+			]
+		},
+		"procedures": {
+			"patterns": [
+				{
+					"name": "entity.name.function.lang",
+					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=(\\s*\\::)?\\s*\\()"
+				}
+			]
+		},
+		"type_decl": {
+			"patterns": [
+				{
+					"name": "entity.name.type.lang",
+					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=\\s*\\::\\s*(enum|union|struct))"
+				},
+				{
+					"name": "entity.name.type.lang",
+					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=\\s*\\::)"
+				}
+			]
+		},
+		"variables": {
+            "patterns": [
+                {
+                    "name": "variable.lang",
+                    "match": "(?<!\\.)\\b([A-Za-z_][A-Za-z_0-9]*?)\\b"
+                }
+            ]
+        }
+	}
+}
