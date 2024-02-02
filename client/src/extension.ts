@@ -24,7 +24,7 @@ export function activate(context: ExtensionContext) {
     documentSelector: [{ scheme: "file", language: "lang" }],
     synchronize: {
       // notify the server about file changes to `.lang` files contained in the workspace
-      fileEvents: workspace.createFileSystemWatcher("**/.lang"),
+      fileEvents: workspace.createFileSystemWatcher("**/*.lang"),
     },
   };
 
