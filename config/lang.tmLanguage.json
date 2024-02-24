@@ -44,20 +44,20 @@
 					"match": "//.*$"
 				},
 				{
-					"name": "keyword.control.lang",
-					"match": "\\b(if|else|for|defer|break|match|return|continue)\\b"
+					"name": "constant.language.lang",
+					"match": "\\b(null|true|false)\\b"
 				},
 				{
 					"name": "keyword.other.lang",
-					"match": "\\b(pub|mut|mod|enum|union|struct|import|super|package|cast|sizeof)\\b"
+					"match": "\\b(pub|mut|super|package|mod|use|proc|enum|union|struct|const|global)\\b"
+				},
+				{
+					"name": "keyword.control.lang",
+					"match": "\\b(break|continue|return|for|defer|if|else|match|as|sizeof)\\b"
 				},
 				{
 					"name": "entity.name.type.lang",
 					"match": "\\b(bool|s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize|f32|f64|char|rawptr)\\b"
-				},
-				{
-					"name": "constant.language.lang",
-					"match": "\\b(null|true|false)\\b"
 				}
 			]
 		},
