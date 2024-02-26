@@ -1,42 +1,53 @@
 {
-  "name": "lang-ls-client",
+  "name": "lang-ls",
   "displayName": "lang-ls",
-  "description": "lang language support",
+  "description": "Lang language support for Visual Studio Code",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.85.0"
   },
+  "keywords": [
+    "lang"
+  ],
   "categories": [
+    "Formatters",
     "Programming Languages"
   ],
   "activationEvents": [
-    "onLanguage"
+    "onLanguage:lang"
   ],
-  "main": "./client/out/extension",
+  "main": "./dist/main",
   "contributes": {
-    "languages": [{
-      "id": "lang",
-      "aliases": ["lang", "lang"],
-      "extensions": [".lang"],
-      "configuration": "./config/language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "lang",
-      "scopeName": "source.lang",
-      "path": "./config/lang.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "lang",
+        "aliases": [
+          "lang"
+        ],
+        "extensions": [
+          ".lang"
+        ],
+        "configuration": "./lang-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "lang",
+        "scopeName": "source.lang",
+        "path": "./lang-tmLanguage.json"
+      }
+    ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -b",
-    "watch": "tsc -b -w"
+    "compile": "tsc -b"
   },
   "dependencies": {
     "vscode-languageclient": "^8.1.0"
   },
   "devDependencies": {
-    "@types/vscode": "^1.81.0",
-    "@types/node": "^20.5.7",
+    "@types/node": "^20.11.20",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
     "typescript": "^5.2.2"
   }
 }

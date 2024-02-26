@@ -1,1 +1,1 @@
-# lang lsp client
+# lang-ls client

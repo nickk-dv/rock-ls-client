@@ -1,3 +1,7 @@
-.vscode/**
-.vscode-test/**
-.gitignore
+**
+!dist/main.js
+!lang-configuration.json
+!lang-tmLanguage.json
+!package-lock.json
+!package.json
+!README.md

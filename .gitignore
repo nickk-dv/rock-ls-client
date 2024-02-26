@@ -1,5 +1,4 @@
-out
-*.vsix
-node_modules
-.vscode-test
+dist/
+node_modules/
 tsconfig.tsbuildinfo
+*.vsix

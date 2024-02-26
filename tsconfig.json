@@ -1,21 +1,41 @@
+// https://www.typescriptlang.org/tsconfig
 {
   "compilerOptions": {
+    // Modules
     "module": "commonjs",
-    "target": "es2020",
-    "lib": ["es2020"],
-    "outDir": "out",
-    "rootDir": "src",
+    "target": "es2022",
+    "lib": ["es2022"],
+    "rootDir": "./src",
+    // Projects
+    "incremental": true,
+    // Emit
+    "outDir": "./dist",
     "sourceMap": true,
-    "incremental": true
+    "noEmitOnError": true,
+    "removeComments": true,
+    "newLine": "lf",
+    // JavaScript Support
+    "allowJs": false,
+    // Type Checking
+    "strict": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    // Interop Constraints
+    "isolatedModules": true,
   },
   "include": [
     "src"
   ],
   "exclude": [
-    "node_modules",
-    ".vscode-test"
+    "node_modules"
   ],
-  "references": [
-    { "path": "./client" },
-  ]
 }
