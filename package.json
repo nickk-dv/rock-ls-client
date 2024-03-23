@@ -1,40 +1,37 @@
 {
-  "name": "lang-ls",
-  "displayName": "lang-ls",
-  "description": "Lang language support for Visual Studio Code",
+  "name": "rock-ls",
+  "displayName": "Rock language",
+  "description": "Rock language support for Visual Studio Code",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.85.0"
   },
   "keywords": [
-    "lang"
+    "rock"
   ],
   "categories": [
     "Formatters",
     "Programming Languages"
   ],
-  "activationEvents": [
-    "onLanguage:lang"
-  ],
   "main": "./dist/main",
   "contributes": {
     "languages": [
       {
-        "id": "lang",
+        "id": "rock",
         "aliases": [
-          "lang"
+          "rock"
         ],
         "extensions": [
-          ".lang"
+          ".rock"
         ],
-        "configuration": "./lang-configuration.json"
+        "configuration": "./rock-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "lang",
-        "scopeName": "source.lang",
-        "path": "./lang-tmLanguage.json"
+        "language": "rock",
+        "scopeName": "source.rock",
+        "path": "./rock-tmLanguage.json"
       }
     ]
   },
@@ -42,8 +39,8 @@
     "typecheck": "tsc",
     "build-base": "esbuild ./src/main.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node --target=node20",
     "vscode:prepublish": "npm run build-base -- --minify",
-    "package": "vsce package -o lang-ls.vsix",
-    "local install": "codium --install-extension lang-ls.vsix"
+    "package": "vsce package -o rock-ls.vsix",
+    "local install": "codium --install-extension rock-ls.vsix"
   },
   "dependencies": {
     "vscode-languageclient": "^8.1.0"

@@ -1,9 +1,9 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "lang",
-	"scopeName": "source.lang",
+	"name": "rock",
+	"scopeName": "source.rock",
 	"files.associations": {
-		"*.lang": "source.lang"
+		"*.rock": "source.rock"
 	},
 	"patterns": [
 		{ "include": "#comments"  },
@@ -44,19 +44,19 @@
 					"match": "//.*$"
 				},
 				{
-					"name": "constant.language.lang",
+					"name": "constant.language.rock",
 					"match": "\\b(null|true|false)\\b"
 				},
 				{
-					"name": "keyword.other.lang",
-					"match": "\\b(pub|mut|super|package|mod|use|proc|enum|union|struct|const|global)\\b"
+					"name": "keyword.other.rock",
+					"match": "\\b(let|var|pub|mut|super|package|mod|use|proc|enum|union|struct|const|global)\\b"
 				},
 				{
-					"name": "keyword.control.lang",
+					"name": "keyword.control.rock",
 					"match": "\\b(break|continue|return|for|defer|if|else|match|as|sizeof)\\b"
 				},
 				{
-					"name": "entity.name.type.lang",
+					"name": "entity.name.type.rock",
 					"match": "\\b(bool|s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize|f32|f64|char|rawptr)\\b"
 				}
 			]
@@ -74,12 +74,12 @@
 			]
 		},
 		"strings": {
-			"name": "string.quoted.double.lang",
+			"name": "string.quoted.double.rock",
 			"begin": "\"",
 			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.lang",
+					"name": "constant.character.escape.rock",
 					"match": "\\\\."
 				}
 			]
@@ -87,7 +87,7 @@
 		"procedures": {
 			"patterns": [
 				{
-					"name": "entity.name.function.lang",
+					"name": "entity.name.function.rock",
 					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=(\\s*\\::)?\\s*\\()"
 				}
 			]
@@ -95,11 +95,11 @@
 		"type_decl": {
 			"patterns": [
 				{
-					"name": "entity.name.type.lang",
+					"name": "entity.name.type.rock",
 					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=\\s*\\::\\s*(enum|union|struct))"
 				},
 				{
-					"name": "entity.name.type.lang",
+					"name": "entity.name.type.rock",
 					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=\\s*\\::)"
 				}
 			]
@@ -107,7 +107,7 @@
 		"variables": {
             "patterns": [
                 {
-                    "name": "variable.lang",
+                    "name": "variable.rock",
                     "match": "(?<!\\.)\\b([A-Za-z_][A-Za-z_0-9]*?)\\b"
                 }
             ]

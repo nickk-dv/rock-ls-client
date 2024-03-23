@@ -1,1 +1,1 @@
-# lang-ls client
+# Rock language support for VSCode

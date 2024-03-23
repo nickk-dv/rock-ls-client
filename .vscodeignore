@@ -1,7 +1,7 @@
 **
 !dist/main.js
-!lang-configuration.json
-!lang-tmLanguage.json
+!rock-configuration.json
+!rock-tmLanguage.json
 !package-lock.json
 !package.json
 !README.md
