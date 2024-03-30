@@ -49,11 +49,11 @@
 				},
 				{
 					"name": "keyword.other.rock",
-					"match": "\\b(let|var|pub|mut|super|package|mod|use|proc|enum|union|struct|const|global)\\b"
+					"match": "\\b(pub|proc|enum|union|struct|const|global|import)\\b"
 				},
 				{
 					"name": "keyword.control.rock",
-					"match": "\\b(break|continue|return|for|defer|if|else|match|as|sizeof)\\b"
+					"match": "\\b(let|mut|break|continue|return|for|defer|if|else|match|as|sizeof)\\b"
 				},
 				{
 					"name": "entity.name.type.rock",
