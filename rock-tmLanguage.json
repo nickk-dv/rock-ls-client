@@ -6,16 +6,25 @@
 		"*.rock": "source.rock"
 	},
 	"patterns": [
-		{ "include": "#comments"  },
-		{ "include": "#keywords"  },
-		{ "include": "#constants" },
-		{ "include": "#strings"   },
-		{ "include": "#procedures"},
-		{ "include": "#type_decl" },
-		{ "include": "#variables" }
+		{ "include": "#comment_line"  },
+		{ "include": "#comment_block" },
+		{ "include": "#constant"      },
+		{ "include": "#keyword"       },
+		{ "include": "#string"        },
+		{ "include": "#proc_item"     },
+		{ "include": "#type_item"     },
+		{ "include": "#variable"      }
 	],
 	"repository": {
-		"comments": {
+		"comment_line": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash",
+					"match": "//.*$"
+				}
+			]
+		},
+		"comment_block": {
 			"patterns": [
 				{
 					"name": "comment.block",
@@ -31,49 +40,45 @@
 					},
 					"patterns": [
 						{
-							"include": "#comments"
+							"include": "#comment_block"
 						}
 					]
 				}
 			]
 		},
-		"keywords": {
+		"constant": {
 			"patterns": [
 				{
-					"name": "comment.line.double-dash",
-					"match": "//.*$"
+					"name": "constant.numeric.rock",
+					"match": "\\b\\d+\\.\\d+\\b"
+				},
+				{
+					"name": "constant.numeric.rock",
+					"match": "\\b\\d+\\b"
 				},
 				{
 					"name": "constant.language.rock",
 					"match": "\\b(null|true|false)\\b"
-				},
+				}
+			]
+		},
+		"keyword": {
+			"patterns": [
 				{
 					"name": "keyword.other.rock",
 					"match": "\\b(pub|proc|enum|union|struct|const|global|import)\\b"
 				},
 				{
-					"name": "keyword.control.rock",
+					"name": "keyword.other.rock",
 					"match": "\\b(let|mut|break|continue|return|for|defer|if|else|match|as|sizeof)\\b"
 				},
 				{
 					"name": "entity.name.type.rock",
-					"match": "\\b(bool|s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize|f32|f64|char|rawptr)\\b"
+					"match": "\\b(s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize|f16|f32|f64|bool|char|rawptr|void|never)\\b"
 				}
 			]
 		},
-		"constants": {
-			"patterns": [
-				{
-					"name": "constant.numeric",
-					"match": "\\b(0|([1-9]\\d*))(f32|f64|s8|s16|s32|s64|ssize|u8|u16|u32|u64|usize)?\\b"
-				},
-				{
-					"name": "constant.numeric",
-					"match": "\\b\\d+\\.\\d+(f32|f64)?\\b"
-				}
-			]
-		},
-		"strings": {
+		"string": {
 			"name": "string.quoted.double.rock",
 			"begin": "\"",
 			"end": "\"",
@@ -84,33 +89,33 @@
 				}
 			]
 		},
-		"procedures": {
+		"proc_item": {
 			"patterns": [
 				{
 					"name": "entity.name.function.rock",
-					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=(\\s*\\::)?\\s*\\()"
+					"match": "(?<=\\bproc\\s+)\\b([A-Za-z_][A-Za-z_0-9]*)\\b"
+				},
+				{
+					"name": "entity.name.function.rock",
+					"match": "\\b([A-Za-z_][A-Za-z_0-9]*)\\b(?=\\s*\\()"
 				}
 			]
 		},
-		"type_decl": {
+		"type_item": {
 			"patterns": [
 				{
 					"name": "entity.name.type.rock",
-					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=\\s*\\::\\s*(enum|union|struct))"
-				},
-				{
-					"name": "entity.name.type.rock",
-					"match": "\\b([A-Za-z_][A-Za-z_0-9]*?)\\b(?=\\s*\\::)"
+					"match": "(?<=\\b(enum|union|struct)\\s+)\\b([A-Za-z_][A-Za-z_0-9]*)\\b"
 				}
 			]
 		},
-		"variables": {
-            "patterns": [
-                {
-                    "name": "variable.rock",
-                    "match": "(?<!\\.)\\b([A-Za-z_][A-Za-z_0-9]*?)\\b"
-                }
-            ]
-        }
+		"variable": {
+			"patterns": [
+				{
+					"name": "variable.rock",
+					"match": "(?<!\\.)\\b([A-Za-z_][A-Za-z_0-9]*?)\\b"
+				}
+			]
+		}
 	}
 }
