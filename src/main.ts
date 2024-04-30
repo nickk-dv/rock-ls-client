@@ -4,6 +4,17 @@ import * as lc from "vscode-languageclient/node";
 let client: lc.LanguageClient;
 
 export function activate(_: vs.ExtensionContext) {
+  start_language_server();
+}
+
+export function deactivate(): Thenable<void> | undefined {
+  if (!client) {
+    return undefined;
+  }
+  return client.stop();
+}
+
+function start_language_server() {
   const serverPath = "rock_ls";
   const serverOptions: lc.ServerOptions = {
     run: { command: serverPath, transport: lc.TransportKind.stdio },
@@ -27,9 +38,16 @@ export function activate(_: vs.ExtensionContext) {
   client.start();
 }
 
-export function deactivate(): Thenable<void> | undefined {
-  if (!client) {
-    return undefined;
+vs.commands.registerCommand("rock.restart", () => {
+  if (client) {
+    client.restart();
+  } else {
+    start_language_server();
   }
-  return client.stop();
-}
+});
+
+vs.commands.registerCommand("rock.disable", () => {
+  if (client) {
+    client.stop().then(() => {});
+  }
+});

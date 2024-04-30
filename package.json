@@ -2,24 +2,31 @@
   "name": "rock-ls",
   "displayName": "Rock language",
   "description": "Rock language support for Visual Studio Code",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nickk-dv/rock-ls-client"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "keywords": [
+    "Rock"
+  ],
   "engines": {
     "vscode": "^1.85.0"
   },
-  "keywords": [
-    "rock"
+  "activationEvents": [
+    "workspaceContains:Rock.toml"
   ],
-  "categories": [
-    "Formatters",
-    "Programming Languages"
-  ],
-  "main": "./dist/main",
   "contributes": {
     "languages": [
       {
         "id": "rock",
         "aliases": [
-          "rock"
+          "rock",
+          "Rock"
         ],
         "extensions": [
           ".rock"
@@ -33,8 +40,47 @@
         "scopeName": "source.rock",
         "path": "./rock-tmLanguage.json"
       }
+    ],
+    "commands": [
+      {
+        "command": "rock.restart",
+        "title": "Restart language server",
+        "shortTitle": "Restart LSP",
+        "category": "rock-ls"
+      },
+      {
+        "command": "rock.disable",
+        "title": "Disable language server",
+        "shortTitle": "Disable LSP",
+        "category": "rock-ls"
+      }
+    ],
+    "configurationDefaults": {
+			"[rock]": {
+				"editor.formatOnSave": true
+			}
+		},
+    "configuration": [
+      {
+        "title": "Rock",
+        "properties": {
+          "rock.path": {
+            "type": "string",
+            "default": null,
+            "description": "Path to Rock installation directory. By default PATH is used.",
+            "scope": "machine"
+          },
+          "rock.formatOnSave": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable auto formatting on save.",
+            "scope": "machine"
+          }
+        }
+      }
     ]
   },
+  "main": "./dist/main",
   "scripts": {
     "typecheck": "tsc",
     "build-base": "esbuild ./src/main.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node --target=node20",
