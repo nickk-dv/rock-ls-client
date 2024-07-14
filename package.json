@@ -1,15 +1,14 @@
 {
   "name": "rock-ls",
+  "version": "0.1.0",
   "displayName": "Rock language",
   "description": "Rock language support for Visual Studio Code",
-  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/nickk-dv/rock-ls-client"
   },
   "categories": [
-    "Programming Languages",
-    "Formatters"
+    "Programming Languages"
   ],
   "keywords": [
     "Rock"
@@ -43,51 +42,44 @@
     ],
     "commands": [
       {
-        "command": "rock.restart",
-        "title": "Restart language server",
-        "shortTitle": "Restart LSP",
-        "category": "rock-ls"
+        "category": "rock-ls",
+        "command": "rock-ls.restart",
+        "title": "Restart language server"
       },
       {
-        "command": "rock.disable",
-        "title": "Disable language server",
-        "shortTitle": "Disable LSP",
-        "category": "rock-ls"
+        "category": "rock-ls",
+        "command": "rock-ls.disable",
+        "title": "Disable language server"
       }
     ],
     "configurationDefaults": {
-			"[rock]": {
-				"editor.formatOnSave": true
-			}
-		},
+      "[rock]": {
+        "editor.formatOnSave": true
+      }
+    },
     "configuration": [
       {
-        "title": "Rock",
+        "title": "rock-ls",
         "properties": {
-          "rock.path": {
+          "rock-ls.path": {
             "type": "string",
             "default": null,
-            "description": "Path to Rock installation directory. By default PATH is used.",
-            "scope": "machine"
-          },
-          "rock.formatOnSave": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable auto formatting on save.",
+            "description": "Path to rock-ls executable. By default PATH will be used.",
             "scope": "machine"
           }
         }
       }
     ]
   },
-  "main": "./dist/main",
+  "main": "./dist/main.js",
   "scripts": {
     "typecheck": "tsc",
     "build-base": "esbuild ./src/main.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node --target=node20",
     "vscode:prepublish": "npm run build-base -- --minify",
     "package": "vsce package -o rock-ls.vsix",
-    "local install": "codium --install-extension rock-ls.vsix",
-    "local uninstall": "codium --uninstall-extension undefined_publisher.rock-ls"
+    "local:install": "codium --install-extension rock-ls.vsix",
+    "local:uninstall": "codium --uninstall-extension undefined_publisher.rock-ls",
+    "local:rebuild": "npm run local:uninstall && npm run package && npm run local:install"
   },
   "dependencies": {
     "vscode-languageclient": "^8.1.0"
@@ -96,7 +88,7 @@
     "@types/node": "^20.11.20",
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^2.24.0",
-    "esbuild": "^0.20.1",
+    "esbuild": "^0.20.2",
     "typescript": "^5.2.2"
   }
 }
