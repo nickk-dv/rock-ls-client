@@ -36,8 +36,8 @@ function start_language_server() {
   }
 
   const serverOptions: lc.ServerOptions = {
-    run: { command: rock_ls_path, transport: lc.TransportKind.stdio },
-    debug: { command: rock_ls_path, transport: lc.TransportKind.stdio },
+    run: { command: rock_ls_path, args: ["lsp"], transport: lc.TransportKind.stdio },
+    debug: { command: rock_ls_path, args: ["lsp"], transport: lc.TransportKind.stdio },
   };
 
   const clientOptions: lc.LanguageClientOptions = {
