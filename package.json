@@ -3,19 +3,13 @@
   "version": "0.1.0",
   "displayName": "Rock language",
   "description": "Rock language support for Visual Studio Code",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nickk-dv/rock-ls-client"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "keywords": [
-    "Rock"
-  ],
-  "engines": {
-    "vscode": "^1.85.0"
-  },
+  "private": "true",
+  "publisher": "rock-lang",
+  "repository": { "type": "git", "url": "https://github.com/nickk-dv/rock-ls-client" },
+  "license": "MIT",
+  "keywords": ["Rock"],
+  "categories": ["Programming Languages", "Formatters"],
+
   "activationEvents": [
     "workspaceContains:Rock.toml"
   ],
@@ -23,21 +17,9 @@
     "languages": [
       {
         "id": "rock",
-        "aliases": [
-          "rock",
-          "Rock"
-        ],
-        "extensions": [
-          ".rock"
-        ],
-        "configuration": "./rock-configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "rock",
-        "scopeName": "source.rock",
-        "path": "./rock-tmLanguage.json"
+        "aliases": ["Rock"],
+        "extensions": [".rock"],
+        "configuration": "./rock-config.json"
       }
     ],
     "commands": [
@@ -54,7 +36,8 @@
     ],
     "configurationDefaults": {
       "[rock]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.semanticHighlighting.enabled": true
       }
     },
     "configuration": [
@@ -71,24 +54,26 @@
       }
     ]
   },
+
   "main": "./dist/main.js",
+  "engines": { "vscode": "^1.85.0" },
   "scripts": {
     "typecheck": "tsc",
     "build-base": "esbuild ./src/main.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node --target=node20",
     "vscode:prepublish": "npm run build-base -- --minify",
     "package": "vsce package -o rock-ls.vsix",
     "local:install": "codium --install-extension rock-ls.vsix",
-    "local:uninstall": "codium --uninstall-extension undefined_publisher.rock-ls",
+    "local:uninstall": "codium --uninstall-extension rock-lang.rock-ls",
     "local:rebuild": "npm run local:uninstall && npm run package && npm run local:install"
   },
   "dependencies": {
-    "vscode-languageclient": "^8.1.0"
+    "vscode-languageclient": "9.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.20",
-    "@types/vscode": "^1.85.0",
-    "@vscode/vsce": "^2.24.0",
-    "esbuild": "^0.20.2",
-    "typescript": "^5.2.2"
+    "@types/node": "22.7.5",
+    "@types/vscode": "1.85.0",
+    "@vscode/vsce": "3.1.1",
+    "esbuild": "0.24.0",
+    "typescript": "5.6.3"
   }
 }

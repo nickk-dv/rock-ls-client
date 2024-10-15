@@ -1,8 +1,6 @@
 **
 !dist/main.js
-!rock-configuration.json
-!rock-tmLanguage.json
-!package-lock.json
+!rock-config.json
 !package.json
 !LICENSE
 !README.md
