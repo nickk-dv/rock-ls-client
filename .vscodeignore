@@ -1,5 +1,6 @@
 **
 !dist/main.js
+!rock-icon.svg
 !rock-config.json
 !package.json
 !LICENSE

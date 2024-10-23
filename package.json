@@ -19,7 +19,8 @@
         "id": "rock",
         "aliases": ["Rock"],
         "extensions": [".rock"],
-        "configuration": "./rock-config.json"
+        "configuration": "./rock-config.json",
+        "icon": { "light": "rock-icon.svg", "dark": "rock-icon.svg" }
       }
     ],
     "commands": [
