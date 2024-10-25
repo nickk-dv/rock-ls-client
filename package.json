@@ -8,7 +8,7 @@
   "repository": { "type": "git", "url": "https://github.com/nickk-dv/rock-ls-client" },
   "license": "MIT",
   "keywords": ["Rock"],
-  "categories": ["Programming Languages", "Formatters"],
+  "categories": ["Formatters", "Programming Languages"],
 
   "activationEvents": [
     "workspaceContains:Rock.toml"
@@ -21,6 +21,18 @@
         "extensions": [".rock"],
         "configuration": "./rock-config.json",
         "icon": { "light": "rock-icon.svg", "dark": "rock-icon.svg" }
+      },
+      {
+        "id": "rock_syn",
+        "aliases": ["RockSyntax"],
+        "extensions": [".rock_syn"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rock_syn",
+        "scopeName": "source.rock_syn",
+        "path": "./rock_syn-grammar.json"
       }
     ],
     "commands": [
@@ -33,6 +45,11 @@
         "category": "rock-ls",
         "command": "rock-ls.disable",
         "title": "Disable language server"
+      },
+      {
+        "category": "rock-ls",
+        "command": "rock-ls.show_syntax_tree",
+        "title": "Show syntax tree"
       }
     ],
     "configurationDefaults": {

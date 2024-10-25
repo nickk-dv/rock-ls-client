@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "rock_syn",
+    "scopeName": "source.rock_syn",
+    "fileTypes": ["rock_syn"],
+    "patterns": [
+        { "include": "#trivia_name" },
+        { "include": "#node_name" },
+        { "include": "#source_text" },
+        { "include": "#range_number" }
+    ],
+    "repository": {
+        "trivia_name": {
+            "match": "^\\s*([A-Z_][A-Z_0-9]*?)@",
+            "captures": {
+                "1": {
+                    "name": "variable.parameter"
+                }
+            }
+        },
+        "node_name": {
+            "match": "^\\s*([A-Z_][A-Z_0-9]*)",
+            "captures": {
+                "1": {
+                    "name": "entity.name.type"
+                }
+            }
+        },
+        "source_text": {
+            "match": "\".+\"",
+            "name": "string"
+        },
+        "range_number": {
+            "match": "\\d+",
+            "name": "constant.numeric"
+        }
+    }
+}
