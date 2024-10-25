@@ -1,86 +1,55 @@
-import * as fs from "fs";
 import * as vs from "vscode";
 import * as lc from "vscode-languageclient/node";
+import * as cmd from "./commands";
+import { Ctx } from "./context";
 
-export function activate(_: vs.ExtensionContext) {
-    start_language_server();
+export async function activate(ext: vs.ExtensionContext) {
+    const ctx = new Ctx(ext, create_client(), create_command_registry());
+    await ctx.start();
 }
 
 export function deactivate(): Thenable<void> | undefined {
-    return client?.stop();
+    return undefined;
 }
 
-let client: lc.LanguageClient;
-
-function start_language_server() {
-    const config = vs.workspace.getConfiguration("rock-ls");
-    let config_path = config.get("path");
-    let rock_ls_path: string = "rock_ls";
-
-    if (typeof config_path === "string") {
-        let common = `Please ensure it points to 'rock_ls' executable.
-    You can edit "rock-ls.path" in the settings.`;
-
-        if (!fs.existsSync(config_path)) {
-            error_message(`Specified "rock-ls.path" does not exist.`, common);
-            return;
-        } else if (!fs.statSync(config_path).isFile()) {
-            error_message(`Specified "rock-ls.path" is not a file.`, common);
-            return;
-        } else if (!(config_path.endsWith("rock_ls") || config_path.endsWith("rock_ls.exe"))) {
-            error_message(`Specified "rock-ls.path" points to unknown file.`, common);
-            return;
-        } else {
-            rock_ls_path = config_path;
-        }
-    }
-
-    const serverOptions: lc.ServerOptions = {
-        run: { command: rock_ls_path, args: ["lsp"], transport: lc.TransportKind.stdio },
-        debug: { command: rock_ls_path, args: ["lsp"], transport: lc.TransportKind.stdio },
+function create_client(): lc.LanguageClient {
+    let server_path = "rock_ls";
+    let server_exe = {
+        command: server_path,
+        args: ["lsp"],
+        transport: lc.TransportKind.stdio
     };
 
-    const clientOptions: lc.LanguageClientOptions = {
+    const server_options: lc.ServerOptions = {
+        run: server_exe,
+        debug: server_exe,
+    };
+
+    const client_options: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: "file", language: "rock" }],
         synchronize: {
             fileEvents: vs.workspace.createFileSystemWatcher("**/*.rock"),
         },
     };
 
-    client = new lc.LanguageClient(
+    return new lc.LanguageClient(
         "rock-ls",
         "rock-ls",
-        serverOptions,
-        clientOptions
+        server_options,
+        client_options
     );
-
-    client.start().catch(() => {
-        const message = `Could not resolve path to 'rock_ls' executable.
-    Please ensure it is available in PATH used by VSCode.
-    Or explicitly set "rock-ls.path" in the settings.`;
-        error_message(message);
-    });
 }
 
-function error_message(message: string, common?: string) {
-    const full_message = common ? `${message} ${common}` : message;
-    vs.window.showErrorMessage(full_message);
+function create_command_registry(): Record<string, cmd.CommandImpl> {
+    return {
+        "restart": {
+            enabled: (ctx) => async () => { await ctx.restart() },
+            disabled: (ctx) => async () => { await ctx.start() },
+        },
+        "disable": {
+            enabled: (ctx) => async () => { await ctx.stop() },
+            disabled: (_) => async () => { },
+        },
+        "show_syntax_tree": { enabled: cmd.show_syntax_tree },
+    }
 }
-
-vs.commands.registerCommand("rock-ls.restart", () => {
-    client?.restart();
-});
-
-vs.commands.registerCommand("rock-ls.disable", () => {
-    client?.stop();
-});
-
-vs.commands.registerCommand("rock-ls.show_syntax_tree", async () => {
-    const editor = vs.window.activeTextEditor;
-    if (!editor) return;
-    const document = editor.document;
-    const params = { text_document: { uri: document.uri.toString() } };
-    const response = await client.sendRequest<{ tree_display: string }>("custom/show_syntax_tree", params);
-    const tree_document = await vs.workspace.openTextDocument({ language: "rock_syn", content: response.tree_display });
-    void (await vs.window.showTextDocument(tree_document, vs.ViewColumn.Two, true));
-});

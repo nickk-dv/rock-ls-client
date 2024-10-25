@@ -57,20 +57,7 @@
         "editor.formatOnSave": true,
         "editor.semanticHighlighting.enabled": true
       }
-    },
-    "configuration": [
-      {
-        "title": "rock-ls",
-        "properties": {
-          "rock-ls.path": {
-            "type": "string",
-            "default": null,
-            "description": "Path to rock-ls executable. By default PATH will be used.",
-            "scope": "machine"
-          }
-        }
-      }
-    ]
+    }
   },
 
   "main": "./dist/main.js",
