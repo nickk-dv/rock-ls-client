@@ -32,12 +32,14 @@ function create_client(): lc.LanguageClient {
         },
     };
 
-    return new lc.LanguageClient(
+    const client = new lc.LanguageClient(
         "rock-ls",
         "rock-ls",
         server_options,
         client_options
     );
+    client.registerFeature(new OverrideFeature());
+    return client;
 }
 
 function create_command_registry(): Record<string, cmd.CommandImpl> {
@@ -52,4 +54,21 @@ function create_command_registry(): Record<string, cmd.CommandImpl> {
         },
         "show_syntax_tree": { enabled: cmd.show_syntax_tree },
     }
+}
+
+class OverrideFeature implements lc.StaticFeature {
+    getState(): lc.FeatureState {
+        return { kind: "static" };
+    }
+    fillClientCapabilities(capabilities: lc.ClientCapabilities): void {
+        const caps = capabilities.textDocument?.semanticTokens;
+        if (caps) {
+            caps.augmentsSyntaxTokens = false;
+        }
+    }
+    initialize(
+        _capabilities: lc.ServerCapabilities,
+        _documentSelector: lc.DocumentSelector | undefined,
+    ): void { }
+    clear(): void { }
 }
