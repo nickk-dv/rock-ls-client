@@ -7,8 +7,8 @@
   "publisher": "rock-lang",
   "repository": { "type": "git", "url": "https://github.com/nickk-dv/rock-ls-client" },
   "license": "MIT",
-  "keywords": ["Rock"],
-  "categories": ["Formatters", "Programming Languages"],
+  "keywords": [ "Rock" ],
+  "categories": [ "Formatters", "Programming Languages" ],
 
   "activationEvents": [
     "workspaceContains:Rock.toml"
@@ -17,22 +17,30 @@
     "languages": [
       {
         "id": "rock",
-        "aliases": ["Rock"],
-        "extensions": [".rock"],
-        "configuration": "./rock-config.json",
-        "icon": { "light": "rock-icon.svg", "dark": "rock-icon.svg" }
+        "aliases": [ "Rock" ],
+        "extensions": [ ".rock" ],
+        "configuration": "./config/rock-config.json",
+        "icon": {
+          "light": "./assets/rock-icon.svg",
+          "dark": "./assets/rock-icon.svg"
+        }
       },
       {
         "id": "rock_syn",
-        "aliases": ["RockSyntax"],
-        "extensions": [".rock_syn"]
+        "aliases": [ "RockSyntax" ],
+        "extensions": [ ".rock_syn" ]
       }
     ],
     "grammars": [
       {
+        "language": "rock",
+        "scopeName": "source.rock",
+        "path": "./config/rock-grammar.json"
+      },
+      {
         "language": "rock_syn",
         "scopeName": "source.rock_syn",
-        "path": "./rock_syn-grammar.json"
+        "path": "./config/rock_syn-grammar.json"
       }
     ],
     "commands": [
@@ -69,7 +77,10 @@
     "package": "vsce package -o rock-ls.vsix",
     "local:install": "codium --install-extension rock-ls.vsix",
     "local:uninstall": "codium --uninstall-extension rock-lang.rock-ls",
-    "local:rebuild": "npm run local:uninstall && npm run package && npm run local:install"
+    "local:rebuild": "npm run local:uninstall && npm run package && npm run local:install",
+    "local:install:code": "code --install-extension rock-ls.vsix",
+    "local:uninstall:code": "code --uninstall-extension rock-lang.rock-ls",
+    "local:rebuild:code": "npm run local:uninstall:code && npm run package && npm run local:install:code"
   },
   "dependencies": {
     "vscode-languageclient": "9.0.1"

@@ -13,11 +13,9 @@ export function deactivate(): Thenable<void> | undefined {
 }
 
 function create_client(): lc.LanguageClient {
-    let server_path = "rock_ls";
     let server_exe = {
-        command: server_path,
-        args: ["lsp"],
-        transport: lc.TransportKind.stdio
+        command: "rock_ls",
+        transport: lc.TransportKind.stdio,
     };
 
     const server_options: lc.ServerOptions = {
@@ -38,7 +36,7 @@ function create_client(): lc.LanguageClient {
         server_options,
         client_options
     );
-    client.registerFeature(new OverrideFeature());
+    client.registerFeature(new DisableSemanticTokenAugment());
     return client;
 }
 
@@ -56,7 +54,7 @@ function create_command_registry(): Record<string, cmd.CommandImpl> {
     }
 }
 
-class OverrideFeature implements lc.StaticFeature {
+class DisableSemanticTokenAugment implements lc.StaticFeature {
     getState(): lc.FeatureState {
         return { kind: "static" };
     }

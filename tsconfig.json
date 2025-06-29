@@ -11,13 +11,11 @@
     "strict": true,
     "noEmitOnError": true,
     "removeComments": true,
-    "newLine": "lf",
     "allowJs": false,
     "sourceMap": false,
 
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,

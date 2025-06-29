@@ -1,8 +1,7 @@
 **
+!assets/**
+!config/**
 !dist/main.js
-!rock-icon.svg
-!rock-config.json
-!rock_syn-grammar.json
 !package.json
 !LICENSE
 !README.md

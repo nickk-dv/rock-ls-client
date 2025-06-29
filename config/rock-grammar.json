@@ -1,0 +1,31 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "rock",
+    "scopeName": "source.rock",
+    "fileTypes": [ "rock" ],
+
+    "patterns": [
+        { "include": "#char_lit" },
+        { "include": "#string_raw" },
+        { "include": "#string_lit" },
+        { "include": "#line_comment" }
+    ],
+    "repository": {
+        "char_lit": {
+            "match": "'(?:[^'\\\\]|\\\\.)?'",
+            "name": "string"
+        },
+        "string_raw": {
+            "match": "`[^`]*`",
+            "name": "string"
+        },
+        "string_lit": {
+            "match": "\"(?:[^\"\\\\]|\\\\.)*\"",
+            "name": "string"
+        },
+        "line_comment": {
+            "match": "\/\/.*",
+            "name": "comment.line"
+        }
+    }
+}
